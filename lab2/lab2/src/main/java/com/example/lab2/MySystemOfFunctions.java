@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.function.BiFunction;
 import java.util.function.Function;
 
+import static com.example.lab2.Common.ACCURACY;
 import static com.example.lab2.Common.MC;
 
 public class MySystemOfFunctions implements Function<BigDecimal, BigDecimal> {
@@ -29,11 +30,17 @@ public class MySystemOfFunctions implements Function<BigDecimal, BigDecimal> {
         if (x.doubleValue() <= 0){
             Double apply = sec.apply(x);
             if (apply.isNaN()) return null;
+            var tanRes = tan.apply(x);
+            if (tanRes.abs().doubleValue() < ACCURACY) return null;
             return BigDecimal.valueOf(apply)
-                    .divide(tan.apply(x), MC);
+                    .divide(tanRes, MC);
         } else {
+            var lnRes = ln.apply(x);
+            if(lnRes.abs().doubleValue() < ACCURACY){
+                return null;
+            }
             return ln.apply(x).pow(6).add(log.apply(x,5))
-                    .divide(ln.apply(x), MC)
+                    .divide(lnRes, MC)
                     .multiply(ln.apply(x));
         }
     }

@@ -12,11 +12,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LogIntegrationTests {
 
     @ParameterizedTest
-    @CsvSource({""})
+    @CsvSource({"5,1", "25,2"})
     public void calcCosTest(double x, double y){
         Ln ln = new Ln();
         Log log = new Log(ln::calcLn);
 
-        assertEquals(y, log.calcLog(BigDecimal.valueOf(x), 2).doubleValue(), 0.0001);
+        assertEquals(y, log.calcLog(BigDecimal.valueOf(x), 5).doubleValue(), 0.0001);
     }
 }

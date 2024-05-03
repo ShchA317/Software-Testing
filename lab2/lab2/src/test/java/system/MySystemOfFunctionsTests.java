@@ -5,6 +5,10 @@ import com.example.lab2.primitives.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.math.BigDecimal;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 public class MySystemOfFunctionsTests {
     MySystemOfFunctions mySystemOfFunctions;
 
@@ -22,6 +26,6 @@ public class MySystemOfFunctionsTests {
 
     @Test
     public void test(){
-
+        assertEquals(mySystemOfFunctions.apply(BigDecimal.valueOf(-5)).doubleValue(), 1.0, 0.1);
     }
 }
